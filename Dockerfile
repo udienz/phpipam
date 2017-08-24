@@ -2,7 +2,7 @@ FROM php:5.6-apache
 MAINTAINER Pierre Cheynier <pierre.cheynier@sfr.com>
 
 ENV PHPIPAM_SOURCE https://github.com/phpipam/phpipam/archive/
-ENV PHPIPAM_VERSION 1.2
+ENV PHPIPAM_VERSION 1.3
 ENV WEB_REPO /var/www/html
 
 # Install required deb packages
@@ -12,7 +12,9 @@ RUN apt-get update && \
 
 # Configure apache and required PHP modules 
 RUN docker-php-ext-configure mysqli --with-mysqli=mysqlnd && \
-	docker-php-ext-install mysqli && \
+	docker-php-ext-iinstall mysqli && \
+	docker-php-ext-install pcntl && \
+	docker-php-ext-install mbstring && \
 	docker-php-ext-install pdo_mysql && \
 	docker-php-ext-install gettext && \ 
 	ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h && \
